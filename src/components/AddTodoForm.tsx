@@ -21,22 +21,26 @@ function AddTodoForm({ addTodo }: AddTodoFormProps) {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Title:</label>
+                <label>Title:
                 <input
+                    name="titlePlaceholder"
                     type="text"
                     placeholder="Provide a title for the new To Do"
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
+                </label>
             </div>
             <div>
-                <label>Description:</label>
+                <label>Description:
                 <textarea
+                    name="descriptionPlaceholder"
                     value={desc}
                     placeholder="Briefly describe the To Do task"
                     onChange={(e) => setDesc(e.target.value)}
                     required
                 />
+                </label>
             </div>
             <button type="submit">Add To Do</button>
         </form>

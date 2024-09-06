@@ -11,7 +11,11 @@ const Banner: React.FC = () => {
 
     useEffect(() => {
         const fetchImg = async () => {
-            const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+            const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', {
+                headers: {
+                    'Cache-Control': 'max-age=3600'
+                }
+            });
             const data = await res.json();
 
             setImgUrl(data.url);
@@ -20,7 +24,11 @@ const Banner: React.FC = () => {
             setCopyright(data.copyright);
         };
 
-        fetchImg();
+        try {
+            fetchImg();
+        } catch (e) {
+            console.log(e);
+        }
 
         const handleResize = () => {
             const bannerElement = document.querySelector('.banner');
@@ -30,7 +38,7 @@ const Banner: React.FC = () => {
         window.addEventListener('resize', handleResize);
 
         handleResize();
-    }, []);
+    }, [hdImgUrl, imgUrl]);
 
     if (!currentImgUrl)
         return <p>Banner Loading...</p>;
